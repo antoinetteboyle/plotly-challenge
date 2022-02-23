@@ -25,16 +25,15 @@ function optionSelect() {
   for (let i = 0; i < c.length; i++) {
   let row = c[i];
    if (row.id==option) {
-    //if (row.id=="940") {
-      //Object.entries(row).forEach(([key, value]) => console.log(`Key: ${key} and Value ${value}`));
-      console.log(`Id ${option} otu_ids found! ${row.otu_ids}`);
-      console.log(`Id ${option} sample_values found! ${row.sample_values}`);
-      console.log(`Id ${option} otu_labels found! ${row.otu_labels}`)
+
+       //** START BARCHART in if statement***   
+      console.log(`Barchart Id ${option} otu_ids found! ${row.otu_ids}`);
+      console.log(`Barchart Id ${option} sample_values found! ${row.sample_values}`);
+      console.log(`Barchart Id ${option} otu_labels found! ${row.otu_labels}`)
       var slicedx = row.sample_values.slice(0, 10).reverse();
       var slicedy = row.otu_ids.slice(0, 10).reverse();
       var slicedz = slicedy.map(item => `OTC# ${item}`);
       var slicedtext = row.otu_labels.slice(0, 10).reverse();
-      console.log(slicedx,slicedz,slicedtext);
       let trace1 = {
          x: slicedx,
          y: slicedz,
@@ -50,61 +49,31 @@ function optionSelect() {
         };
         let traceData = [trace1];
         Plotly.newPlot("bar", traceData,layout);
+  //** END BARCHART in if statement***     
      
-//** START BUBBLE in if statement***
-var data = [{x: row.otu_ids,
-             y: row.sample_values,
-             z: row.otu_labels}]
-// set the dimensions and margins of the graph
-const margin = {top: 10, right: 20, bottom: 30, left: 50},
-width = 500 - margin.left - margin.right,
-height = 420 - margin.top - margin.bottom;
+  //** START BUBBLE in if statement***
+       var trace2 = {x: row.otu_ids,   //slicedz,
+                     y: row.sample_values, //slicedx,
+                     text: row.otu_labels, //slicedtext,
+                     marker: {
+                    //color: row.otu_ids,
+                     // color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)',
+                     //        'rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)',
+                     //        'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
+                      size: row.otu_ids} 
+                  };
+        console.log(`Bubble chart data x ${trace2.x}, y ${trace2.y}`);
+        var bubbledata = [trace2];
+        var layout = { title: 'Bubble Chart Hover Text',
+                    showlegend: false,
+                    height: 600,
+                    width: 600};
+        Plotly.newPlot('bubble', bubbledata, layout);
+   //** END BUBBLE***
 
-// append the svg object to the body of the page
-const svg = d3.select("#bubble")
-.append("svg")
-.attr("width", width + margin.left + margin.right)
-.attr("height", height + margin.top + margin.bottom)
-.append("g")
-.attr("transform", `translate(${margin.left},${margin.top})`);
-
-// Add X axis
-const x = d3.scaleLinear()
-.domain([0, 4000])
-.range([ 0, width ]);
-svg.append("g")
-.attr("transform", `translate(0, ${height})`)
-.call(d3.axisBottom(x));
-
-// Add Y axis
-const y = d3.scaleLinear()
-.domain([0, 1000])
-.range([ height, 0]);
-svg.append("g")
-.call(d3.axisLeft(y));
-
-// Add a scale for bubble size
-const z = d3.scaleLinear()
-.domain([200000, 1310000000])
-.range([ 1, 40]);
-
-// Add dots
-svg.append('g')
-.selectAll("dot")
-.data(data)
-.join("circle")
-.attr("cx", d => x(d.x))
-.attr("cy", d => y(d.y))
-.attr("r", d => z(d.z))
-.style("fill", "#69b3a2")
-.style("opacity", "0.7")
-.attr("stroke", "black")
-
-//** END BUBBLE***
-
-// End if for option ID row selected of samples
+// End if option ID row selected of samples
       }
-    // End samples for loop
+    // End for loop samples option ID selected
       }
 
   // DEMOGRAPHICS: Loop through metadata list (b) of id objects
@@ -113,17 +82,31 @@ svg.append('g')
      if (row.id==option) {
       console.log(`Id ${option} metadata id found! ${row.ethnicity}`);
       //Appends html metadate for row selected
+      // d3.selectAll(td).remove()
       var dbody = d3.select("div#sample-metadata.panel-body").append("tbody").append("tr");
         Object.entries(row).forEach(([key, value]) => {
         console.log(`Key: ${key} and Value: ${value}`);
         var cell = dbody.append("td");
         cell.text(` ${key} : ${value} .`);
         });
-  }};
+ 
+  // GAUGE START
+  var datagauge = [
+    {
+      domain: { x: [0, 1], y: [0, 1] },
+      value: row.wfreq,
+      title: { text: "Speed" },
+      type: "indicator",
+      mode: "gauge+number"
+    }
+  ];
+  var layout = { width: 600, height: 500, margin: { t: 0, b: 0 } };
+  Plotly.newPlot('gauge', datagauge, layout);
+  // GAUGE END
 
-
-// optionSelect id function end brackets 
+  // DEMOGTRAPHIC END if and for loop END
+   }};
+// optionSelect id function end
 }
-
-// Then end brackets 
+// Then end
 });
