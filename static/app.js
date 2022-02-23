@@ -52,16 +52,15 @@ function optionSelect() {
   //** END BARCHART in if statement***     
      
   //** START BUBBLE in if statement***
-       var trace2 = {x: row.otu_ids,   //slicedz,
-                     y: row.sample_values, //slicedx,
-                     text: row.otu_labels, //slicedtext,
+       var trace2 = {x: row.otu_ids,  
+                     y: row.sample_values, 
+                     text: row.otu_labels,
+                     mode: "markers",
                      marker: {
-                    //color: row.otu_ids,
-                     // color: ['rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)',
-                     //        'rgb(93, 164, 214)', 'rgb(255, 144, 14)',  'rgb(44, 160, 101)', 'rgb(255, 65, 54)',
-                     //        'rgb(44, 160, 101)', 'rgb(255, 65, 54)'],
-                      size: row.otu_ids} 
-                  };
+                      size: row.sample_values,
+                      color: row.otu_ids,
+                      colorscale: "Earth",
+                    }};
         console.log(`Bubble chart data x ${trace2.x}, y ${trace2.y}`);
         var bubbledata = [trace2];
         var layout = { title: 'Bubble Chart Hover Text',
