@@ -1,6 +1,6 @@
 
 //1. Read in `samples.json` with D3
-const samples = ('../samples.json');
+const samples = ('/samples.json');
 d3.json(samples).then(function(data) {
 let a = data.names;
 console.log(a);
