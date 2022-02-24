@@ -10,8 +10,8 @@ let c = data.samples;
 console.log(c)
 
 // Populate drop down list
-let drop = d3.select("#selDataset")
-a.forEach(item=>drop.append("option").attr("value",item).text(item));
+let drop = d3.select("#selDataset").attr("class",arrow)
+a.forEach(item=>drop.append("option").attr("value",item).text(`BB_${item}`));
 
 // Call optionChanged() with dropdown option to variable
 d3.select("#selDataset").on("change",optionSelect);
@@ -77,16 +77,16 @@ function optionSelect() {
 
   // DEMOGRAPHICS: Loop through metadata list (b) of id objects
   for (let i = 0; i < b.length; i++) {
+    //d3.selectAll(td).remove()
     let row = b[i];
      if (row.id==option) {
       console.log(`Id ${option} metadata id found! ${row.ethnicity}`);
-      //Appends html metadate for row selected
-      // d3.selectAll(td).remove()
-      var dbody = d3.select("div#sample-metadata.panel-body").append("tbody").append("tr");
+      //Appends html metadate for that induvidual/row selected
+      var dbody = d3.select("div#sample-metadata.panel-body").append("table").attr("class","table-responsive").append("tbody").append("tr");
         Object.entries(row).forEach(([key, value]) => {
         console.log(`Key: ${key} and Value: ${value}`);
-        var cell = dbody.append("td");
-        cell.text(` ${key} : ${value} .`);
+        var cell = dbody.append("tr").append("td");
+        cell.text(` ${key} : "${value}" `)
         });
  
   // GAUGE START

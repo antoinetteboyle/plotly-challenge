@@ -1,9 +1,10 @@
 # plotly-challenge
 
  We build an interactive dashboard to explore microbes that colonise humans. Microbial species (also called operational taxonomic units, or OTU's) were present in more than 70% of people, while the rest were relatively rare.
+
  We used the D3 library to read in data from [samples.json](./samples.json).
 
-The main code can be found at [main code](./static/app.js)
+The main html code can be found at [main html code](./index.html) and the functionality is found at [app.js](./static/app.js)
 
  Created a horizontal bar chart with a dropdown menu to display the top 10 OTUs found in that individual.
 
