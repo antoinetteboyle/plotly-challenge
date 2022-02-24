@@ -10,7 +10,7 @@ let c = data.samples;
 console.log(c)
 
 // Populate drop down list
-let drop = d3.select("#selDataset").attr("class",arrow)
+let drop = d3.select("#selDataset")
 a.forEach(item=>drop.append("option").attr("value",item).text(`BB_${item}`));
 
 // Call optionChanged() with dropdown option to variable
