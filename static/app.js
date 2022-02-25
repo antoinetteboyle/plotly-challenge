@@ -1,6 +1,7 @@
 
 //1. Read in `samples.json` with D3
-const samples = ('/plotly-challenge/samples.json');
+//const samples = ('/plotly-challenge/samples.json');
+const samples = ('data/samples.json');
 d3.json(samples).then(function(data) {
 let a = data.names;
 console.log(a);
@@ -94,7 +95,7 @@ function optionSelect() {
     {
       domain: { x: [0, 1], y: [0, 1] },
       value: row.wfreq,
-      title: { text: "Speed" },
+      title: { text: "Belly button washing frequency" },
       type: "indicator",
       mode: "gauge+number"
     }
