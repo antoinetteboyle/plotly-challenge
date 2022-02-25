@@ -45,8 +45,8 @@ function optionSelect() {
         };
       var layout = {
           title: "Top ten OTU's Chart",
-           xaxis: { title: "Sample values"},
-           yaxis: { title: "Otu Id's"}
+           xaxis: { title: "Sample values"}
+          // yaxis: { title: "Otu Id's"}
         };
         let traceData = [trace1];
         Plotly.newPlot("bar", traceData,layout);

@@ -2,7 +2,7 @@
 
  We build an interactive dashboard to explore microbes that colonise humans. Microbial species (also called operational taxonomic units, or OTU's) were present in more than 70% of people, while the rest were relatively rare.
 
- We used the D3 library to read in data from [samples.json](./samples.json).
+ We used the D3 library to read in data from [samples.json](./data/samples.json).
 
 The main html code can be found at [main html code](./index.html) and the functionality is found at [app.js](./static/app.js)
 
