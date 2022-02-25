@@ -77,19 +77,19 @@ function optionSelect() {
       }
 
   // DEMOGRAPHICS: Loop through metadata list (b) of id objects
+  d3.select("#sample-metadata").html("");
   for (let i = 0; i < b.length; i++) {
-    //d3.selectAll(td).remove()
-    let row = b[i];
+    let row = b[i];  
      if (row.id==option) {
       console.log(`Id ${option} metadata id found! ${row.ethnicity}`);
       //Appends html metadate for that induvidual/row selected
       var dbody = d3.select("div#sample-metadata.panel-body").append("table").attr("class","table-responsive").append("tbody").append("tr");
-        Object.entries(row).forEach(([key, value]) => {
+      Object.entries(row).forEach(([key, value]) => {
         console.log(`Key: ${key} and Value: ${value}`);
         var cell = dbody.append("tr").append("td");
-        cell.text(` ${key} : "${value}" `)
+        cell.text(` ${key.toUpperCase()} : "${value}" `)
         });
- 
+
   // GAUGE START
   var datagauge = [
     {
@@ -105,7 +105,8 @@ function optionSelect() {
   // GAUGE END
 
   // DEMOGTRAPHIC END if and for loop END
-   }};
+   }
+  };
 // optionSelect id function end
 }
 // Then end
