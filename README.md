@@ -1,6 +1,10 @@
 # plotly-challenge
 
+![bacteria](./images/bacteria.jpg)
+
  We build an interactive dashboard to explore microbes that colonise humans. Microbial species (also called operational taxonomic units, or OTU's) were present in more than 70% of people, while the rest were relatively rare.
+![1. Final Website Visual](./images/dashboard_part1.png)
+![2. Final Website Visual](./images/dashboard_part2.png)
 
  We used the D3 library to read in data from [samples.json](./data/samples.json).
 
